@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Loading } from '@components/Loading';
+import { Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import { AddMember } from '@screens/AddMember';
+import { NewTeam } from '@screens/NewTeam';
+import { Teams } from '@screens/Teams';
+import theme from '@theme/index';
+import { useFonts } from 'expo-font';
+import { StatusBar } from 'react-native';
+import { ThemeProvider } from 'styled-components/native';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
+  
   return (
-    <View style={styles.container}>
-      <Text>Equipes</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme}>
+      <StatusBar
+      barStyle="dark-content" 
+      backgroundColor= "transparent"
+      translucent
+      />
+      { fontsLoaded ? <AddMember /> : <Loading /> }   
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fffffff8',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
